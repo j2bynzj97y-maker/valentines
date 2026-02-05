@@ -54,6 +54,12 @@ p{
 
 /* Buttons */
 
+.buttons{
+    position:relative;
+    width:300px;
+    height:120px;
+}
+
 button{
     padding:12px 25px;
     font-size:18px;
@@ -61,16 +67,22 @@ button{
     border-radius:25px;
     margin:10px;
     cursor:pointer;
+    position:absolute;
 }
 
 .yes{
     background:#ff4d6d;
     color:white;
+    left:20px;
+    bottom:10px;
 }
 
 .no{
     background:#444;
     color:white;
+    right:20px;
+    bottom:10px;
+    transition:0.2s;
 }
 
 /* Gift */
@@ -120,9 +132,9 @@ button{
     <h1>ROTUDUUU ❤️</h1>
     <p>Will you be my Valentine? 😙🤭❤️</p>
 
-    <div>
+    <div class="buttons">
         <button class="yes" onclick="yes()">Yes 😋❤️</button>
-        <button class="no" onclick="no()">No 😞💔</button>
+        <button class="no" id="noBtn">No 😞💔</button>
     </div>
 </div>
 
@@ -131,7 +143,8 @@ button{
 
 <div id="s2" class="screen">
     <h1>
-    YAAAYYY 😙😙😙😙😙❤️❤️❤️ I KNEW YOU'D SAY YESSSS 😙🤭❤️ 
+    YAAAYYY 😙😙😙😙😙❤️❤️❤️  
+    I KNEW YOU'D SAY YESSSS 😙🤭❤️  
     I LOVEEEE YOUUUUUU SOOOOO MUCHHHH 😙😙😙😙❤️❤️❤️❤️❤️❤️❤️❤️
     </h1>
 
@@ -151,24 +164,13 @@ button{
 
 <script>
 
-let noCount = 0;
-
-const texts = [
-"Pleaseee 😞💔",
-"Think again 😞❤️",
-"I love you 😞💔❤️",
-"Say yes na 😞🤭",
-"My heart is yours 😞❤️",
-"Only you 😞💔❤️"
-];
-
-/* Your real background images */
+/* Backgrounds */
 const bg1 = "49424D66-818C-4E33-B8EF-AA1B238B9EA5.jpeg";
 const bg2 = "FA772161-E160-4EDE-B556-4F8ED0818F8A.jpeg";
 
-/* First background */
 document.body.style.backgroundImage = `url('${bg1}')`;
 
+/* Yes Button */
 function yes(){
     document.getElementById("s1").classList.remove("active");
     document.getElementById("s2").classList.add("active");
@@ -176,14 +178,27 @@ function yes(){
     document.body.style.backgroundImage = `url('${bg1}')`;
 }
 
-function no(){
+/* Moving No Button 😏 */
+const noBtn = document.getElementById("noBtn");
 
-    const btn = document.querySelector(".no");
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
 
-    btn.innerText = texts[noCount % texts.length];
+function moveButton(){
 
-    noCount++;
+    const container = document.querySelector(".buttons");
+
+    const maxX = container.clientWidth - noBtn.clientWidth;
+    const maxY = container.clientHeight - noBtn.clientHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 }
+
+/* Gift */
 
 function openGift(){
 
