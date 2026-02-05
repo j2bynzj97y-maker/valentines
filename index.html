@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Valentine</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+
+    /* Valentine Sunflower Background */
+    background:url("https://images.unsplash.com/photo-1526045612212-70caf35c14df") no-repeat center;
+    background-size:cover;
+
+    font-family:'Comic Sans MS',cursive;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:background 1s ease;
+}
+
+/* Gift Box */
+
+#gift{
+    width:200px;
+    height:200px;
+    background:linear-gradient(45deg,#ff6b6b,#ffb3b3);
+    border-radius:25px;
+    cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-size:22px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+
+    animation:float 2s infinite ease-in-out;
+
+    transition:all 1s ease;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+/* Open Animation */
+
+#gift.open{
+    transform:scale(3);
+    opacity:0;
+}
+
+/* Card */
+
+.card{
+    display:none;
+
+    background:rgba(255,255,255,0.96);
+    padding:30px;
+    border-radius:25px;
+    width:90%;
+    max-width:360px;
+
+    text-align:center;
+
+    box-shadow:0 0 25px rgba(0,0,0,0.3);
+
+    animation:fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+h1{color:#ff9900;}
+
+p{
+    font-size:18px;
+    min-height:60px;
+}
+
+/* Buttons */
+
+button{
+    padding:12px 22px;
+    border:none;
+    border-radius:25px;
+    font-size:16px;
+    cursor:pointer;
+    margin:8px;
+    transition:0.3s;
+}
+
+#yesBtn{background:gold;}
+
+#noBtn{
+    background:#ff6b6b;
+    color:white;
+    position:relative;
+}
+
+button:hover{transform:scale(1.1);}
+
+/* Yay */
+
+#yay{
+    display:none;
+    font-size:20px;
+    color:#ff9900;
+    animation:pop 1s infinite alternate;
+}
+
+@keyframes pop{
+    from{transform:scale(1);}
+    to{transform:scale(1.1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Gift -->
+
+<div id="gift" onclick="openGift()">
+Open Me 😙❤️
+</div>
+
+<!-- Card -->
+
+<div class="card" id="card">
+
+<h1>Hey ❤️</h1>
+
+<p id="question"></p>
+
+<div id="buttons">
+<button id="yesBtn" onclick="sayYes()">Yes 😋</button>
+<button id="noBtn" onclick="moveNo()">No 😞</button>
+</div>
+
+<div id="yay">
+
+YAAAYYY 😙😙😙😙😙❤️❤️❤️ <br><br>
+
+I KNEW YOU'D SAY YESSSS 😙🤭❤️ <br><br>
+
+I LOVEEEE YOUUUUUU SOOOOO MUCHHHH 😙😙😙😙❤️❤️❤️❤️❤️❤️❤️❤️
+
+</div>
+
+</div>
+
+<script>
+
+/* Open Gift */
+
+function openGift(){
+
+    const gift=document.getElementById("gift");
+
+    gift.classList.add("open");
+
+    setTimeout(()=>{
+        gift.style.display="none";
+        document.getElementById("card").style.display="block";
+        typeText();
+    },1000);
+}
+
+/* Typing Effect */
+
+const text="ROTUDUUU, will you be my Valentine 😙❤️";
+let i=0;
+
+function typeText(){
+
+    if(i<text.length){
+
+        document.getElementById("question").innerHTML+=text.charAt(i);
+        i++;
+
+        setTimeout(typeText,70);
+    }
+}
+
+/* No Button Run */
+
+function moveNo(){
+
+    const btn=document.getElementById("noBtn");
+
+    const x=Math.random()*250-125;
+    const y=Math.random()*200-100;
+
+    btn.style.transform=`translate(${x}px,${y}px)`;
+}
+
+/* Yes */
+
+function sayYes(){
+
+    document.getElementById("buttons").style.display="none";
+    document.getElementById("question").style.display="none";
+    document.getElementById("yay").style.display="block";
+
+    /* Romantic Background */
+
+    document.body.style.backgroundImage=
+    "url('https://images.unsplash.com/photo-1518190171695-bbbb69c4a901')";
+}
+
+</script>
+
+</body>
+</html>
