@@ -3,32 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>My Valentine</title>
+<title>My Valentine ❤️</title>
 
 <style>
 
 body{
     margin:0;
-    font-family: 'Comic Sans MS', cursive;
-    text-align:center;
+    font-family:'Comic Sans MS', cursive;
     height:100vh;
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    transition:background 1s ease;
+    transition:1s;
+    overflow:hidden;
 }
 
 /* Screens */
 
 .screen{
-    display:none;
-    height:100vh;
+    position:absolute;
+    top:0;
+    left:0;
     width:100%;
+    height:100%;
+    display:none;
     justify-content:center;
     align-items:center;
     flex-direction:column;
-    backdrop-filter: blur(3px);
+    text-align:center;
     background:rgba(0,0,0,0.4);
     padding:20px;
 }
@@ -39,50 +41,63 @@ body{
 
 /* Text */
 
-h1{
+h1,p{
     color:white;
-    font-size:2.2em;
-    margin-bottom:20px;
-    text-shadow:2px 2px 5px black;
+    text-shadow:2px 2px 6px black;
 }
 
-p{
-    color:white;
-    font-size:1.4em;
-    text-shadow:2px 2px 5px black;
-}
+h1{ font-size:2.3em; }
+p{ font-size:1.4em; }
 
 /* Buttons */
 
 .buttons{
     position:relative;
-    width:300px;
-    height:120px;
+    width:320px;
+    height:180px;
+    margin-top:20px;
 }
 
 button{
-    padding:12px 25px;
+    padding:12px 26px;
     font-size:18px;
     border:none;
-    border-radius:25px;
-    margin:10px;
+    border-radius:30px;
     cursor:pointer;
     position:absolute;
+    transition:0.2s ease;
 }
 
 .yes{
     background:#ff4d6d;
     color:white;
-    left:20px;
-    bottom:10px;
+    left:50%;
+    bottom:15px;
+    transform:translateX(-50%);
 }
 
 .no{
     background:#444;
     color:white;
-    right:20px;
-    bottom:10px;
-    transition:0.2s;
+}
+
+/* Heart */
+
+.heart{
+    position:absolute;
+    font-size:25px;
+    animation:float 3s linear forwards;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-200px) scale(1.5);
+        opacity:0;
+    }
 }
 
 /* Gift */
@@ -94,7 +109,7 @@ button{
     border-radius:15px;
     position:relative;
     cursor:pointer;
-    transition:0.6s ease;
+    transition:0.7s ease;
 }
 
 .gift::before{
@@ -118,7 +133,7 @@ button{
 }
 
 .open{
-    transform:scale(1.2) rotate(10deg);
+    transform:scale(1.3) rotate(12deg);
 }
 
 </style>
@@ -129,81 +144,125 @@ button{
 <!-- SCREEN 1 -->
 
 <div id="s1" class="screen active">
+
     <h1>ROTUDUUU ❤️</h1>
     <p>Will you be my Valentine? 😙🤭❤️</p>
 
     <div class="buttons">
+
         <button class="yes" onclick="yes()">Yes 😋❤️</button>
+
         <button class="no" id="noBtn">No 😞💔</button>
+
     </div>
+
 </div>
 
 
 <!-- SCREEN 2 -->
 
 <div id="s2" class="screen">
-    <h1>
-    YAAAYYY 😙😙😙😙😙❤️❤️❤️  
-    I KNEW YOU'D SAY YESSSS 😙🤭❤️  
-    I LOVEEEE YOUUUUUU SOOOOO MUCHHHH 😙😙😙😙❤️❤️❤️❤️❤️❤️❤️❤️
-    </h1>
 
-    <p>Tap the gift 🤭</p>
+<h1>
+YAAAYYY 😙😙😙😙😙❤️❤️❤️  
+I KNEW YOU'D SAY YESSSS 😙🤭❤️  
+I LOVEEEE YOUUUUUU SOOOOO MUCHHHH 😙😙😙😙❤️❤️❤️❤️❤️❤️❤️❤️
+</h1>
 
-    <div class="gift" onclick="openGift()"></div>
+<p>Open the gift 🤭</p>
+
+<div class="gift" onclick="openGift()"></div>
+
 </div>
 
 
 <!-- SCREEN 3 -->
 
 <div id="s3" class="screen">
-    <h1>Forever You & Me ❤️😙🤭</h1>
-    <p>Happy Valentine My Love 😋❤️</p>
+
+<h1>Forever Us ❤️😙🤭</h1>
+<p>Happy Valentine My Love 😋❤️</p>
+
 </div>
 
 
 <script>
 
 /* Backgrounds */
-const bg1 = "49424D66-818C-4E33-B8EF-AA1B238B9EA5.jpeg";
-const bg2 = "FA772161-E160-4EDE-B556-4F8ED0818F8A.jpeg";
+const bg1="49424D66-818C-4E33-B8EF-AA1B238B9EA5.jpeg";
+const bg2="FA772161-E160-4EDE-B556-4F8ED0818F8A.jpeg";
 
-document.body.style.backgroundImage = `url('${bg1}')`;
+document.body.style.backgroundImage=`url('${bg1}')`;
 
-/* Yes Button */
+
+/* Impossible No Button */
+
+const noBtn=document.getElementById("noBtn");
+const area=document.querySelector(".buttons");
+
+function teleport(){
+
+    const maxX=area.clientWidth-noBtn.clientWidth;
+    const maxY=area.clientHeight-noBtn.clientHeight;
+
+    const x=Math.random()*maxX;
+    const y=Math.random()*maxY;
+
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+}
+
+/* Escape before touch */
+noBtn.addEventListener("touchstart",teleport);
+noBtn.addEventListener("mouseenter",teleport);
+noBtn.addEventListener("mouseover",teleport);
+
+
+/* YES Animation */
+
 function yes(){
-    document.getElementById("s1").classList.remove("active");
-    document.getElementById("s2").classList.add("active");
 
-    document.body.style.backgroundImage = `url('${bg1}')`;
+    createHearts();
+
+    document.getElementById("s1").style.opacity="0";
+
+    setTimeout(()=>{
+
+        document.getElementById("s1").classList.remove("active");
+        document.getElementById("s2").classList.add("active");
+
+        document.body.style.backgroundImage=`url('${bg1}')`;
+
+    },800);
 }
 
-/* Moving No Button 😏 */
-const noBtn = document.getElementById("noBtn");
 
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("click", moveButton);
+/* Floating hearts */
 
-function moveButton(){
+function createHearts(){
 
-    const container = document.querySelector(".buttons");
+    for(let i=0;i<25;i++){
 
-    const maxX = container.clientWidth - noBtn.clientWidth;
-    const maxY = container.clientHeight - noBtn.clientHeight;
+        const heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerText="❤️";
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.top="80vh";
+        heart.style.fontSize=(20+Math.random()*20)+"px";
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(()=>heart.remove(),3000);
+    }
 }
+
 
 /* Gift */
 
 function openGift(){
 
-    const gift = document.querySelector(".gift");
-
+    const gift=document.querySelector(".gift");
     gift.classList.add("open");
 
     setTimeout(()=>{
@@ -211,9 +270,9 @@ function openGift(){
         document.getElementById("s2").classList.remove("active");
         document.getElementById("s3").classList.add("active");
 
-        document.body.style.backgroundImage = `url('${bg2}')`;
+        document.body.style.backgroundImage=`url('${bg2}')`;
 
-    },600);
+    },700);
 }
 
 </script>
