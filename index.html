@@ -13,9 +13,9 @@
 body{
     margin:0;
     height:100vh;
-    font-family:'Poppins', sans-serif;
     overflow:hidden;
-    background:linear-gradient(to top,#b31217,#e52d27);
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(to top,#fff1f5,#ffe4ec);
 }
 
 /* Screens */
@@ -38,10 +38,28 @@ body{
 /* Text */
 
 h1{
-    color:white;
+    color:#ff2f6d;
     font-size:2.4em;
     margin-bottom:25px;
-    text-shadow:3px 3px 20px rgba(0,0,0,0.7);
+    text-shadow:1px 1px 5px rgba(0,0,0,0.2);
+}
+
+#finalText{
+    position:absolute;
+    top:35%;
+    width:100%;
+    padding:20px;
+    font-size:2.3em;
+    font-weight:800;
+    color:#ff1744;
+    text-align:center;
+    z-index:9999; /* ALWAYS ON TOP */
+    opacity:0;
+    transition:1s;
+}
+
+.showText{
+    opacity:1;
 }
 
 /* Button */
@@ -54,95 +72,42 @@ button{
     background:#ff1744;
     color:white;
     cursor:pointer;
-    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
     transition:0.3s;
 }
 
 button:hover{
-    transform:scale(1.15);
-}
-
-/* Overlay for readability */
-
-#overlay{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.35);
-    z-index:2;
-    opacity:0;
-    transition:1s;
-}
-
-.showOverlay{
-    opacity:1;
-}
-
-/* Final Text */
-
-#finalText{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    color:white;
-    font-size:2.5em;
-    font-weight:800;
-    text-align:center;
-    text-shadow:4px 4px 30px black;
-    z-index:5; /* ALWAYS ABOVE ROSES */
-    opacity:0;
-    transition:1.5s;
-    padding:15px;
-}
-
-.showText{
-    opacity:1;
-}
-
-/* Volcano Base */
-
-#volcano{
-    position:absolute;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:80px;
-    height:40px;
-    background:rgba(0,0,0,0.3);
-    border-radius:50%;
-    z-index:1;
+    transform:scale(1.1);
 }
 
 /* Roses */
 
 .rose{
     position:absolute;
-    bottom:30px;
+    bottom:0;
     left:50%;
-    transform:translateX(-50%);
-    font-size:28px;
+    font-size:26px;
     pointer-events:none;
-    z-index:3;
-    animation:erupt linear forwards;
+    animation:shoot linear forwards;
 }
 
-@keyframes erupt{
+/* Volcano Eruption */
 
-    0%{
+@keyframes shoot{
+
+    from{
         transform:translate(-50%,0) scale(0.8);
         opacity:1;
     }
 
-    30%{
-        opacity:1;
-    }
-
-    100%{
+    to{
         transform:
-        translate(calc(-50% + var(--x)), -120vh)
+        translate(
+            calc(-50% + var(--x)),
+            calc(-100vh + var(--y))
+        )
         rotate(var(--r))
-        scale(1.5);
+        scale(1.4);
 
         opacity:0.9;
     }
@@ -153,7 +118,7 @@ button:hover{
 
 <body>
 
-<!-- SCREEN 1 -->
+<!-- Screen 1 -->
 
 <div id="s1" class="screen">
 
@@ -164,53 +129,46 @@ button:hover{
 </div>
 
 
-<!-- SCREEN 2 -->
+<!-- Screen 2 -->
 
 <div id="s2" class="screen hidden">
-
-    <div id="overlay"></div>
 
     <div id="finalText">
         IT'S ROSE DAY FOR MY PRETTIEST SUNFLOWER ❤️🌹
     </div>
-
-    <div id="volcano"></div>
 
 </div>
 
 
 <script>
 
-let eruptionInterval;
+let burstInterval;
 
 function start(){
 
     document.getElementById("s1").classList.add("hidden");
     document.getElementById("s2").classList.remove("hidden");
 
-    document.getElementById("overlay").classList.add("showOverlay");
-
+    // Show text clearly
     setTimeout(()=>{
         document.getElementById("finalText").classList.add("showText");
-    },1000);
+    },500);
 
-    startEruption();
+    startVolcano();
 }
 
 
-/* Volcano Eruption */
+/* Volcano Effect */
 
-function startEruption(){
+function startVolcano(){
 
-    eruptionInterval = setInterval(()=>{
+    burstInterval = setInterval(()=>{
 
-        for(let i=0;i<20;i++){
-
+        for(let i=0;i<25;i++){
             createRose();
-
         }
 
-    },220); // FAST 🔥🔥🔥
+    },180); // FAST BURSTS 🔥
 }
 
 
@@ -221,26 +179,30 @@ function createRose(){
     rose.innerHTML = "🌹";
 
     // Random size
-    let size = Math.random()*18 + 22;
-    rose.style.fontSize = size + "px";
+    let size = Math.random()*15 + 22;
+    rose.style.fontSize = size+"px";
 
-    // Spread angle (left/right)
-    let spread = (Math.random()-0.5) * 400; // px
-    rose.style.setProperty("--x", spread+"px");
+    // X spread (left-right)
+    let x = (Math.random()-0.5) * 600;
+    rose.style.setProperty("--x", x+"px");
+
+    // Y spread (upwards blast)
+    let y = Math.random()*200;
+    rose.style.setProperty("--y", y+"px");
 
     // Rotation
-    let rot = Math.random()*720+"deg";
-    rose.style.setProperty("--r", rot);
+    let r = Math.random()*720+"deg";
+    rose.style.setProperty("--r", r);
 
     // Speed
-    let duration = Math.random()*1.2 + 2;
-    rose.style.animationDuration = duration+"s";
+    let time = Math.random()*1 + 2;
+    rose.style.animationDuration = time+"s";
 
     document.body.appendChild(rose);
 
     setTimeout(()=>{
         rose.remove();
-    },3500);
+    },3000);
 }
 
 </script>
