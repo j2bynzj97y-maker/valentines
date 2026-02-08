@@ -140,14 +140,13 @@ button:hover{
 
 
 /* Fireworks */
-
 .fire{
     position:absolute;
-    width:6px;
-    height:6px;
-    background:gold;
+    width:8px;
+    height:8px;
+    background:#ffd700;
     border-radius:50%;
-    animation:boom 1.2s linear forwards;
+    animation:boom .8s ease-out forwards;
 }
 
 @keyframes boom{
@@ -168,6 +167,8 @@ button:hover{
     }
 }
 
+
+    
 
 /* Shake */
 
@@ -254,22 +255,24 @@ WILLLL YOU ALWAYS BE MINEEEEE FOREVERRR?
 
 <!-- Screen 5 Celebration -->
 
+
 <div id="s5" class="screen hidden">
 
 <h1>FOREVER US 😭❤️🎆</h1>
 
-<video autoplay loop muted playsinline width="260" style="border-radius:20px;box-shadow:0 0 25px pink;">
-<source src="https://media.tenor.com/3X9v5kH6pTAAAAAC/cat-dance.gif" type="video/mp4">
-</video>
+<img 
+src="https://media.tenor.com/Wx9IEmZZXSoAAAAC/cat-dance.gif"
+width="230"
+style="border-radius:20px;box-shadow:0 0 25px pink;"
+>
 
 <p>You + Me = Always 🫶</p>
 
 </div>
 
 
-<script>
 
-let current=1;
+
 
 
 /* Change Screen */
@@ -353,31 +356,35 @@ startFireworks();
 
 
 /* Fireworks */
-
 function startFireworks(){
 
-setInterval(()=>{
+for(let k=0;k<6;k++){
 
-for(let i=0;i<40;i++){
+setTimeout(()=>{
+
+for(let i=0;i<60;i++){
 
 let f=document.createElement("div");
 f.className="fire";
 
-f.style.left=Math.random()*100+"vw";
-f.style.top=Math.random()*100+"vh";
+f.style.left="50vw";
+f.style.top="50vh";
 
-f.style.setProperty("--x",(Math.random()-0.5)*400);
-f.style.setProperty("--y",(Math.random()-0.5)*400);
+f.style.setProperty("--x",(Math.random()-0.5)*600);
+f.style.setProperty("--y",(Math.random()-0.5)*600);
 
 document.body.appendChild(f);
 
-setTimeout(()=>f.remove(),1200);
+setTimeout(()=>f.remove(),800);
 
 }
 
-},500);
+},k*250);
 
 }
+
+}
+
 
 </script>
 
