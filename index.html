@@ -4,21 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>For You ❤️</title>
+<title>For Rotuduuuuu ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
     margin:0;
     height:100vh;
     overflow:hidden;
-    font-family:'Poppins', sans-serif;
+    font-family:'Poppins',sans-serif;
     background:black;
 }
 
@@ -33,7 +31,7 @@ body{
     align-items:center;
     flex-direction:column;
     text-align:center;
-    padding:20px;
+    padding:25px;
     background-size:cover;
     background-position:center;
     transition:1s;
@@ -46,49 +44,58 @@ body{
 
 /* Backgrounds */
 
-#s1{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url("https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e");}
+#s1{
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url("https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e");
+}
 
-#s2{background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
-url("https://images.unsplash.com/photo-1518895949257-7621c3c786d7");}
+#s2{
+background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+url("https://images.unsplash.com/photo-1518895949257-7621c3c786d7");
+}
 
-#s3{background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
-url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");}
+#s3{
+background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+}
 
-#s4{background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
-url("https://images.unsplash.com/photo-1509042239860-f550ce710b93");}
+#s4{
+background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+url("https://images.unsplash.com/photo-1509042239860-f550ce710b93");
+}
 
-#s5{background:black;}
-
+#s5{
+background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+url("https://images.unsplash.com/photo-1517841905240-472988babdf9");
+}
 
 /* Text */
 
 h1{
     color:white;
-    font-size:clamp(1.8em,5vw,2.4em);
+    font-size:2em;
     margin-bottom:15px;
     text-shadow:0 0 20px #ff2f6d;
 }
 
 p{
     color:#ffe6ec;
-    font-size:clamp(1em,3.8vw,1.25em);
-    line-height:1.5;
-    max-width:600px;
+    font-size:1.05em;
+    line-height:1.6;
+    max-width:500px;
 }
-
 
 /* Button */
 
 button{
-    padding:14px 35px;
-    font-size:clamp(14px,4vw,17px);
+    padding:14px 38px;
+    font-size:16px;
     border:none;
     border-radius:50px;
     background:#ff2f6d;
     color:white;
     cursor:pointer;
-    margin-top:20px;
+    margin-top:22px;
     box-shadow:0 0 20px #ff2f6d;
     transition:.3s;
 }
@@ -96,79 +103,6 @@ button{
 button:hover{
     transform:scale(1.1);
 }
-
-
-/* Fake End */
-
-#fake{
-    font-size:clamp(1.3em,4vw,1.8em);
-    color:#ffd1dc;
-    margin-bottom:15px;
-}
-
-
-/* Roses */
-
-.rose{
-    position:absolute;
-    bottom:-20px;
-    left:50%;
-    font-size:26px;
-    pointer-events:none;
-    animation:burst linear forwards;
-}
-
-@keyframes burst{
-
-    from{
-        transform:translateX(-50%) scale(.8);
-        opacity:1;
-    }
-
-    to{
-        transform:
-        translate(
-            calc(-50% + var(--x)),
-            -110vh
-        )
-        rotate(var(--r))
-        scale(1.4);
-
-        opacity:.95;
-    }
-}
-
-
-/* Fireworks */
-.fire{
-    position:absolute;
-    width:8px;
-    height:8px;
-    background:#ffd700;
-    border-radius:50%;
-    animation:boom .8s ease-out forwards;
-}
-
-@keyframes boom{
-
-    from{
-        transform:scale(1);
-        opacity:1;
-    }
-
-    to{
-        transform:
-        translate(
-            calc(var(--x)*1px),
-            calc(var(--y)*1px)
-        )
-        scale(0);
-        opacity:0;
-    }
-}
-
-
-    
 
 /* Shake */
 
@@ -182,6 +116,61 @@ button:hover{
     50%{transform:translateX(8px)}
     75%{transform:translateX(-8px)}
     100%{transform:translateX(0)}
+}
+
+/* Roses */
+
+.rose{
+    position:absolute;
+    bottom:-20px;
+    left:50%;
+    font-size:26px;
+    pointer-events:none;
+    animation:burst linear forwards;
+}
+
+@keyframes burst{
+from{
+    transform:translateX(-50%) scale(.8);
+    opacity:1;
+}
+to{
+    transform:
+    translate(
+        calc(-50% + var(--x)),
+        -110vh
+    )
+    rotate(var(--r))
+    scale(1.4);
+    opacity:.9;
+}
+}
+
+/* Fireworks */
+
+.fire{
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:#ffd700;
+    border-radius:50%;
+    animation:boom .8s ease-out forwards;
+}
+
+@keyframes boom{
+from{
+    transform:scale(1);
+    opacity:1;
+}
+to{
+    transform:
+    translate(
+        calc(var(--x)*1px),
+        calc(var(--y)*1px)
+    )
+    scale(0);
+    opacity:0;
+}
 }
 
 </style>
@@ -207,7 +196,7 @@ button:hover{
 <p>
 AAGHHH SINCE OCT 26,<br>
 IDK WHAT MAGIC YOU'VE DONEEE<br>
-BUT IM SOOOO CRAZILY IN LOVEEEE WITHHH YOUUUUU 😙❤️
+BUT IM SOOO CRAZILY IN LOVEEEE WITHHH YOUUU 😙❤️
 </p>
 
 <button onclick="go(3)">Next 🤭</button>
@@ -215,21 +204,18 @@ BUT IM SOOOO CRAZILY IN LOVEEEE WITHHH YOUUUUU 😙❤️
 </div>
 
 
-<!-- Screen 3 -->
+<!-- Screen 3 Fake -->
 
 <div id="s3" class="screen hidden">
 
-<div id="fake">That’s all I wanted to say…ALONGGG WITHH</div>
-
 <p>
-YKKK WHY I LOVE YOU SO MUCHH…<br><br>
+Your laugh. Your eyes.  
+The way you look at me…<br><br>
 
-NOT JUST HOW PRETTY YOUR LAUGH IS & YOUR EYES ARE…<br><br>
+How you treat everyone with love and respect…<br><br>
 
-BUT ALSO HOW YOU TREAT EVERYONE WITH LOVE & RESPECT…<br><br>
-
-AND DESPITE SO MANY GUYS AROUND,<br>
-YOU ONLY HAVE YOUR EYES ON MEEE ❤️
+And even with so many guys around…  
+You only have eyes on me ❤️
 </p>
 
 <button onclick="fakeEnd()">MHMMMM ❤️</button>
@@ -237,24 +223,22 @@ YOU ONLY HAVE YOUR EYES ON MEEE ❤️
 </div>
 
 
-<!-- Screen 4 -->
+<!-- Screen 4 Proposal -->
 
 <div id="s4" class="screen hidden">
 
-<h1>I’M ALWAYS GONAA LOVE YOU FOREVERRRR ❤️</h1>
+<h1>I’M ALWAYS GONNA LOVE YOU FOREVERRR ❤️</h1>
 
 <p>
-ANDDDDD WITH THATTTTT…<br>
-WILLLL YOU ALWAYS BE MINEEEEE FOREVERRR?
+Will you always be mine foreverrr?? 😭❤️
 </p>
 
-<button onclick="final()">YESS, FOREVERRR ❤️</button>
+<button onclick="final()">YES FOREVERRR ❤️</button>
 
 </div>
 
 
 <!-- Screen 5 Celebration -->
-
 
 <div id="s5" class="screen hidden">
 
@@ -262,7 +246,7 @@ WILLLL YOU ALWAYS BE MINEEEEE FOREVERRR?
 
 <img 
 src="https://media.tenor.com/Wx9IEmZZXSoAAAAC/cat-dance.gif"
-width="230"
+width="220"
 style="border-radius:20px;box-shadow:0 0 25px pink;"
 >
 
@@ -271,91 +255,84 @@ style="border-radius:20px;box-shadow:0 0 25px pink;"
 </div>
 
 
+<script>
 
+let current=1;
 
-
-
-/* Change Screen */
+/* Change screen */
 
 function go(n){
-
-document.getElementById("s"+current).classList.add("hidden");
-document.getElementById("s"+n).classList.remove("hidden");
-
-current=n;
+    document.getElementById("s"+current).classList.add("hidden");
+    document.getElementById("s"+n).classList.remove("hidden");
+    current=n;
 }
 
-
-/* Fake End */
+/* Fake end */
 
 function fakeEnd(){
 
-document.body.classList.add("shake");
+    document.body.classList.add("shake");
 
-setTimeout(()=>{
-document.body.classList.remove("shake");
-startFinal();
-},800);
+    setTimeout(()=>{
+        document.body.classList.remove("shake");
+        startFinal();
+    },800);
 }
 
-
-/* Final Reveal */
+/* Final */
 
 function startFinal(){
 
-go(4);
+    go(4);
 
-let burst=setInterval(()=>{
+    let burst=setInterval(()=>{
 
-for(let i=0;i<20;i++){
-createRose();
+        for(let i=0;i<20;i++){
+            createRose();
+        }
+
+    },120);
+
+    setTimeout(()=>{
+        clearInterval(burst);
+    },1800);
 }
 
-},140);
-
-setTimeout(()=>{
-clearInterval(burst);
-},1800);
-}
-
-
-/* Create Rose */
+/* Roses */
 
 function createRose(){
 
-let r=document.createElement("div");
-r.className="rose";
-r.innerHTML="🌹";
+    let r=document.createElement("div");
+    r.className="rose";
+    r.innerHTML="🌹";
 
-let size=Math.random()*16+22;
-r.style.fontSize=size+"px";
+    let size=Math.random()*16+22;
+    r.style.fontSize=size+"px";
 
-let x=(Math.random()-0.5)*500;
-r.style.setProperty("--x",x+"px");
+    let x=(Math.random()-0.5)*500;
+    r.style.setProperty("--x",x+"px");
 
-let rot=Math.random()*720+"deg";
-r.style.setProperty("--r",rot);
+    let rot=Math.random()*720+"deg";
+    r.style.setProperty("--r",rot);
 
-let t=Math.random()+2;
-r.style.animationDuration=t+"s";
+    let t=Math.random()+2;
+    r.style.animationDuration=t+"s";
 
-document.body.appendChild(r);
+    document.body.appendChild(r);
 
-setTimeout(()=>r.remove(),3000);
+    setTimeout(()=>r.remove(),3000);
 }
 
-
-/* YES Button */
+/* Final Click */
 
 function final(){
 
-go(5);
-startFireworks();
-
+    go(5);
+    startFireworks();
 }
 
-
 /* Fireworks */
+
 function startFireworks(){
 
 for(let k=0;k<6;k++){
@@ -385,9 +362,9 @@ setTimeout(()=>f.remove(),800);
 
 }
 
-
 </script>
 
 </body>
 </html>
+
 
