@@ -6,16 +6,20 @@
 
 <title>Propose Day ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
 
 <style>
+
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
     height:100vh;
-    font-family:'Poppins', sans-serif;
-    background:linear-gradient(to top right,#ffd1dc,#fff0f5);
     overflow:hidden;
+    font-family:'Poppins', sans-serif;
+    background:#000;
 }
 
 /* Screens */
@@ -30,22 +34,41 @@ body{
     flex-direction:column;
     text-align:center;
     padding:25px;
+    background-size:cover;
+    background-position:center;
+    transition:1s;
 }
 
 .hidden{
-    display:none;
+    opacity:0;
+    pointer-events:none;
 }
+
+/* Backgrounds */
+
+#s1{background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+url("https://images.unsplash.com/photo-1509042239860-f550ce710b93");}
+
+#s2{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url("https://images.unsplash.com/photo-1526045478516-99145907023c");}
+
+#s3{background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");}
+
+#s4{background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+url("https://images.unsplash.com/photo-1517841905240-472988babdf9");}
 
 /* Text */
 
 h1{
-    color:#ff3366;
+    color:white;
     font-size:2.2em;
     margin-bottom:20px;
+    text-shadow:0 0 25px #ff2f6d;
 }
 
 p{
-    color:#444;
+    color:#ffe6ec;
     font-size:1.3em;
     line-height:1.6;
     max-width:500px;
@@ -54,51 +77,50 @@ p{
 /* Button */
 
 button{
-    padding:14px 35px;
+    padding:15px 40px;
     font-size:17px;
     border:none;
-    border-radius:40px;
-    background:#ff3366;
+    border-radius:50px;
+    background:#ff2f6d;
     color:white;
     cursor:pointer;
     margin-top:25px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.25);
-    transition:0.3s;
+    box-shadow:0 0 20px #ff2f6d;
+    transition:.3s;
 }
 
 button:hover{
     transform:scale(1.1);
 }
 
-/* Typing */
+/* Roses */
 
-.typing{
-    border-right:2px solid #ff3366;
-    white-space:nowrap;
-    overflow:hidden;
-    animation:blink 0.7s infinite;
-}
-
-@keyframes blink{
-    50%{border-color:transparent;}
-}
-
-/* Hearts */
-
-.heart{
+.rose{
     position:absolute;
-    font-size:18px;
-    color:#ff4d6d;
-    animation:float 5s linear infinite;
-    opacity:0.7;
+    bottom:-30px;
+    left:50%;
+    font-size:28px;
+    pointer-events:none;
+    animation:burst linear forwards;
 }
 
-@keyframes float{
+@keyframes burst{
+
     from{
-        transform:translateY(100vh) scale(0.8);
+        transform:translateX(-50%) scale(.7);
+        opacity:1;
     }
+
     to{
-        transform:translateY(-100vh) scale(1.3);
+        transform:
+        translate(
+            calc(-50% + var(--x)),
+            -110vh
+        )
+        rotate(var(--r))
+        scale(1.4);
+
+        opacity:.9;
     }
 }
 
@@ -111,11 +133,9 @@ button:hover{
 
 <div id="s1" class="screen">
 
-    <h1 id="type1"></h1>
+    <h1>Hey Rotuduuuuu… ❤️</h1>
 
-    <button id="btn1" style="display:none" onclick="next1()">
-        Tell me ❤️
-    </button>
+    <button onclick="go(2)">Continue</button>
 
 </div>
 
@@ -124,11 +144,13 @@ button:hover{
 
 <div id="s2" class="screen hidden">
 
-    <p id="type2"></p>
+    <p>
+        Some days change everything.<br>
+        Some people change you.<br><br>
+        You did both for me 😙
+    </p>
 
-    <button id="btn2" style="display:none" onclick="next2()">
-        And...? 🤭
-    </button>
+    <button onclick="go(3)">Next</button>
 
 </div>
 
@@ -137,89 +159,98 @@ button:hover{
 
 <div id="s3" class="screen hidden">
 
-    <h1 id="type3"></h1>
+    <h1>It’s Propose Day 🌹</h1>
 
-    <button onclick="finalYes()">
-        YES ❤️
-    </button>
+    <p>
+        And there’s something<br>
+        I really want to tell you…
+    </p>
+
+    <button onclick="startRoses()">See ❤️</button>
+
+</div>
+
+
+<!-- Screen 4 -->
+
+<div id="s4" class="screen hidden">
+
+    <h1 id="final">
+        I’M ALWAYS GONAA LOVE YOU FOREVERRRR ❤️
+    </h1>
+
+    <p>
+        Will you be mine — today, tomorrow, always?
+    </p>
+
+    <button onclick="final()">Always ❤️</button>
 
 </div>
 
 
 <script>
 
-/* Floating Hearts */
+let current=1;
 
-for(let i=0;i<20;i++){
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=(Math.random()*3+4)+"s";
-    document.body.appendChild(h);
+/* Screen Change */
+
+function go(n){
+
+    document.getElementById("s"+current).classList.add("hidden");
+    document.getElementById("s"+n).classList.remove("hidden");
+
+    current=n;
 }
 
 
-/* Typing Effect */
+/* Rose Explosion */
 
-function typeText(id,text,callback){
+function startRoses(){
 
-    let i=0;
-    let el=document.getElementById(id);
+    go(4);
 
-    el.classList.add("typing");
-    el.innerHTML="";
+    let burst=setInterval(()=>{
 
-    let interval=setInterval(()=>{
-
-        el.innerHTML+=text[i];
-        i++;
-
-        if(i>=text.length){
-            clearInterval(interval);
-            el.classList.remove("typing");
-            if(callback)callback();
+        for(let i=0;i<18;i++){
+            createRose();
         }
 
-    },60);
+    },150);
+
+    setTimeout(()=>{
+        clearInterval(burst);
+    },1800);
 }
 
 
-/* Start */
+function createRose(){
 
-typeText("type1",
-"There’s something I’ve been wanting to ask you… 😙",
-()=>{
-    document.getElementById("btn1").style.display="block";
-});
+    let r=document.createElement("div");
+    r.className="rose";
+    r.innerHTML="🌹";
 
+    let size=Math.random()*16+22;
+    r.style.fontSize=size+"px";
 
-function next1(){
+    let x=(Math.random()-0.5)*500;
+    r.style.setProperty("--x",x+"px");
 
-    document.getElementById("s1").classList.add("hidden");
-    document.getElementById("s2").classList.remove("hidden");
+    let rot=Math.random()*720+"deg";
+    r.style.setProperty("--r",rot);
 
-    typeText("type2",
-"From laughing with you…\nTo missing you every day…\nTo smiling at my phone because of you…\n\nRotuduuuuu, you make my world better ❤️",
-()=>{
-        document.getElementById("btn2").style.display="block";
-    });
+    let t=Math.random()+2;
+    r.style.animationDuration=t+"s";
+
+    document.body.appendChild(r);
+
+    setTimeout(()=>r.remove(),3000);
 }
 
 
-function next2(){
+/* Final */
 
-    document.getElementById("s2").classList.add("hidden");
-    document.getElementById("s3").classList.remove("hidden");
-
-    typeText("type3",
-"Will you be mine…\nNot just today…\nBut always? ❤️");
-}
-
-
-function finalYes(){
-
-    alert("I’m yours forever 😙❤️\nHappy Propose Day, my love 💖");
+function final(){
+    alert("Happy Propose Day, my love 😙❤️\nForever yours.");
 }
 
 </script>
