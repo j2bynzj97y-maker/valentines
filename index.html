@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rose Day ❤️</title>
+<title>Propose Day ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 
 body{
     margin:0;
     height:100vh;
-    overflow:hidden;
     font-family:'Poppins', sans-serif;
-    background:linear-gradient(to top,#fff1f5,#ffe4ec);
+    background:linear-gradient(to top right,#ffd1dc,#fff0f5);
+    overflow:hidden;
 }
 
 /* Screens */
@@ -29,6 +29,7 @@ body{
     align-items:center;
     flex-direction:column;
     text-align:center;
+    padding:25px;
 }
 
 .hidden{
@@ -38,41 +39,30 @@ body{
 /* Text */
 
 h1{
-    color:#ff2f6d;
-    font-size:2.4em;
-    margin-bottom:25px;
-    text-shadow:1px 1px 5px rgba(0,0,0,0.2);
+    color:#ff3366;
+    font-size:2.2em;
+    margin-bottom:20px;
 }
 
-#finalText{
-    position:absolute;
-    top:35%;
-    width:100%;
-    padding:20px;
-    font-size:2.3em;
-    font-weight:800;
-    color:#ff1744;
-    text-align:center;
-    z-index:9999; /* ALWAYS ON TOP */
-    opacity:0;
-    transition:1s;
-}
-
-.showText{
-    opacity:1;
+p{
+    color:#444;
+    font-size:1.3em;
+    line-height:1.6;
+    max-width:500px;
 }
 
 /* Button */
 
 button{
-    padding:15px 40px;
-    font-size:18px;
+    padding:14px 35px;
+    font-size:17px;
     border:none;
-    border-radius:50px;
-    background:#ff1744;
+    border-radius:40px;
+    background:#ff3366;
     color:white;
     cursor:pointer;
-    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    margin-top:25px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
     transition:0.3s;
 }
 
@@ -80,36 +70,35 @@ button:hover{
     transform:scale(1.1);
 }
 
-/* Roses */
+/* Typing */
 
-.rose{
-    position:absolute;
-    bottom:0;
-    left:50%;
-    font-size:26px;
-    pointer-events:none;
-    animation:shoot linear forwards;
+.typing{
+    border-right:2px solid #ff3366;
+    white-space:nowrap;
+    overflow:hidden;
+    animation:blink 0.7s infinite;
 }
 
-/* Volcano Eruption */
+@keyframes blink{
+    50%{border-color:transparent;}
+}
 
-@keyframes shoot{
+/* Hearts */
 
+.heart{
+    position:absolute;
+    font-size:18px;
+    color:#ff4d6d;
+    animation:float 5s linear infinite;
+    opacity:0.7;
+}
+
+@keyframes float{
     from{
-        transform:translate(-50%,0) scale(0.8);
-        opacity:1;
+        transform:translateY(100vh) scale(0.8);
     }
-
     to{
-        transform:
-        translate(
-            calc(-50% + var(--x)),
-            calc(-100vh + var(--y))
-        )
-        rotate(var(--r))
-        scale(1.4);
-
-        opacity:0.9;
+        transform:translateY(-100vh) scale(1.3);
     }
 }
 
@@ -122,9 +111,11 @@ button:hover{
 
 <div id="s1" class="screen">
 
-    <h1>yk what day it isssss?????????</h1>
+    <h1 id="type1"></h1>
 
-    <button onclick="start()">What???</button>
+    <button id="btn1" style="display:none" onclick="next1()">
+        Tell me ❤️
+    </button>
 
 </div>
 
@@ -133,76 +124,102 @@ button:hover{
 
 <div id="s2" class="screen hidden">
 
-    <div id="finalText">
-        IT'S ROSE DAY FOR MY PRETTIEST SUNFLOWER ❤️🌹
-    </div>
+    <p id="type2"></p>
+
+    <button id="btn2" style="display:none" onclick="next2()">
+        And...? 🤭
+    </button>
+
+</div>
+
+
+<!-- Screen 3 -->
+
+<div id="s3" class="screen hidden">
+
+    <h1 id="type3"></h1>
+
+    <button onclick="finalYes()">
+        YES ❤️
+    </button>
 
 </div>
 
 
 <script>
 
-let burstInterval;
+/* Floating Hearts */
 
-function start(){
+for(let i=0;i<20;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*3+4)+"s";
+    document.body.appendChild(h);
+}
+
+
+/* Typing Effect */
+
+function typeText(id,text,callback){
+
+    let i=0;
+    let el=document.getElementById(id);
+
+    el.classList.add("typing");
+    el.innerHTML="";
+
+    let interval=setInterval(()=>{
+
+        el.innerHTML+=text[i];
+        i++;
+
+        if(i>=text.length){
+            clearInterval(interval);
+            el.classList.remove("typing");
+            if(callback)callback();
+        }
+
+    },60);
+}
+
+
+/* Start */
+
+typeText("type1",
+"There’s something I’ve been wanting to ask you… 😙",
+()=>{
+    document.getElementById("btn1").style.display="block";
+});
+
+
+function next1(){
 
     document.getElementById("s1").classList.add("hidden");
     document.getElementById("s2").classList.remove("hidden");
 
-    // Show text clearly
-    setTimeout(()=>{
-        document.getElementById("finalText").classList.add("showText");
-    },500);
-
-    startVolcano();
+    typeText("type2",
+"From laughing with you…\nTo missing you every day…\nTo smiling at my phone because of you…\n\nRotuduuuuu, you make my world better ❤️",
+()=>{
+        document.getElementById("btn2").style.display="block";
+    });
 }
 
 
-/* Volcano Effect */
+function next2(){
 
-function startVolcano(){
+    document.getElementById("s2").classList.add("hidden");
+    document.getElementById("s3").classList.remove("hidden");
 
-    burstInterval = setInterval(()=>{
-
-        for(let i=0;i<25;i++){
-            createRose();
-        }
-
-    },180); // FAST BURSTS 🔥
+    typeText("type3",
+"Will you be mine…\nNot just today…\nBut always? ❤️");
 }
 
 
-function createRose(){
+function finalYes(){
 
-    let rose = document.createElement("div");
-    rose.className = "rose";
-    rose.innerHTML = "🌹";
-
-    // Random size
-    let size = Math.random()*15 + 22;
-    rose.style.fontSize = size+"px";
-
-    // X spread (left-right)
-    let x = (Math.random()-0.5) * 600;
-    rose.style.setProperty("--x", x+"px");
-
-    // Y spread (upwards blast)
-    let y = Math.random()*200;
-    rose.style.setProperty("--y", y+"px");
-
-    // Rotation
-    let r = Math.random()*720+"deg";
-    rose.style.setProperty("--r", r);
-
-    // Speed
-    let time = Math.random()*1 + 2;
-    rose.style.animationDuration = time+"s";
-
-    document.body.appendChild(rose);
-
-    setTimeout(()=>{
-        rose.remove();
-    },3000);
+    alert("I’m yours forever 😙❤️\nHappy Propose Day, my love 💖");
 }
 
 </script>
