@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Propose Day ❤️</title>
+<title>For You ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
 
@@ -19,7 +19,7 @@ body{
     height:100vh;
     overflow:hidden;
     font-family:'Poppins', sans-serif;
-    background:#000;
+    background:black;
 }
 
 /* Screens */
@@ -46,17 +46,17 @@ body{
 
 /* Backgrounds */
 
-#s1{background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
-url("https://images.unsplash.com/photo-1509042239860-f550ce710b93");}
+#s1{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url("https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e");}
 
-#s2{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url("https://images.unsplash.com/photo-1526045478516-99145907023c");}
+#s2{background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+url("https://images.unsplash.com/photo-1518895949257-7621c3c786d7");}
 
-#s3{background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+#s3{background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
 url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");}
 
-#s4{background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
-url("https://images.unsplash.com/photo-1517841905240-472988babdf9");}
+#s4{background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+url("https://images.unsplash.com/photo-1509042239860-f550ce710b93");}
 
 /* Text */
 
@@ -64,14 +64,14 @@ h1{
     color:white;
     font-size:2.2em;
     margin-bottom:20px;
-    text-shadow:0 0 25px #ff2f6d;
+    text-shadow:0 0 20px #ff2f6d;
 }
 
 p{
     color:#ffe6ec;
-    font-size:1.3em;
+    font-size:1.25em;
     line-height:1.6;
-    max-width:500px;
+    max-width:550px;
 }
 
 /* Button */
@@ -93,13 +93,21 @@ button:hover{
     transform:scale(1.1);
 }
 
+/* Fake End */
+
+#fake{
+    font-size:1.8em;
+    color:#ffd1dc;
+    margin-bottom:20px;
+}
+
 /* Roses */
 
 .rose{
     position:absolute;
-    bottom:-30px;
+    bottom:-20px;
     left:50%;
-    font-size:28px;
+    font-size:26px;
     pointer-events:none;
     animation:burst linear forwards;
 }
@@ -107,7 +115,7 @@ button:hover{
 @keyframes burst{
 
     from{
-        transform:translateX(-50%) scale(.7);
+        transform:translateX(-50%) scale(.8);
         opacity:1;
     }
 
@@ -120,8 +128,22 @@ button:hover{
         rotate(var(--r))
         scale(1.4);
 
-        opacity:.9;
+        opacity:.95;
     }
+}
+
+/* Shake Effect */
+
+.shake{
+    animation:shake .3s linear 3;
+}
+
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-8px)}
+    50%{transform:translateX(8px)}
+    75%{transform:translateX(-8px)}
+    100%{transform:translateX(0)}
 }
 
 </style>
@@ -145,42 +167,47 @@ button:hover{
 <div id="s2" class="screen hidden">
 
     <p>
-        I'VE BEEN WAITINGGG TO ASK THIS AGAINNN THIS YEAR.<br>
-        AND MANY MORE TO COMEE.<br><br>
-        AGHHHH CANT WAIT TO ASKKK YOUUUU 😙
+        AAGHHH SINCE OCT 26,<br>
+        IDK WHAT MAGIC YOU'VE DONEEE<br>
+        BUT IM SOOOO CRAZILY IN LOVEEEE WITHHH YOUUUUU 😙❤️
     </p>
 
-    <button onclick="go(3)">Next</button>
+    <button onclick="go(3)">Next 🤭</button>
 
 </div>
 
 
-<!-- Screen 3 -->
+<!-- Screen 3 (Fake End) -->
 
 <div id="s3" class="screen hidden">
 
-    <h1>It’s Propose Day 🌹</h1>
+    <div id="fake">That’s all I wanted to say…</div>
 
     <p>
-        SHOULLDDD I ASKKK YOUUUU<br>
-        HMMMMMMMM.....
+        HER LAUGH, HER EYES,<br>
+        HOW SHE LOOKS AT ME MAKES ME FALL IN LOVE HARDER…<br><br>
+
+        HOW SHE TREATS EVERYONE WITH LOVE & RESPECT…<br><br>
+
+        AND DESPITE SO MANY GUYS AROUND,<br>
+        SHE ONLY HAS EYES ON MEEE ❤️
     </p>
 
-    <button onclick="startRoses()">See ❤️</button>
+    <button onclick="fakeEnd()">Okay ❤️</button>
 
 </div>
 
 
-<!-- Screen 4 -->
+<!-- Screen 4 (Final) -->
 
 <div id="s4" class="screen hidden">
 
-    <h1 id="final">
-        OFCCCC IM GONNAAA ASK YOUUUU HHEHEHEH
+    <h1 id="finalText">
+        I’M ALWAYS GONAA LOVE YOU FOREVERRRR ❤️
     </h1>
 
     <p>
-        WILLL YOOU BE MINEEEE FOREVERRR, ALWAYSSS?
+        Will you be mine — today, tomorrow, always?
     </p>
 
     <button onclick="final()">Always ❤️</button>
@@ -192,7 +219,7 @@ button:hover{
 
 let current=1;
 
-/* Screen Change */
+/* Change Screen */
 
 function go(n){
 
@@ -203,25 +230,40 @@ function go(n){
 }
 
 
-/* Rose Explosion */
+/* Fake Ending */
 
-function startRoses(){
+function fakeEnd(){
+
+    document.body.classList.add("shake");
+
+    setTimeout(()=>{
+        document.body.classList.remove("shake");
+        startFinal();
+    },800);
+}
+
+
+/* Final Reveal */
+
+function startFinal(){
 
     go(4);
 
     let burst=setInterval(()=>{
 
-        for(let i=0;i<18;i++){
+        for(let i=0;i<20;i++){
             createRose();
         }
 
-    },150);
+    },140);
 
     setTimeout(()=>{
         clearInterval(burst);
     },1800);
 }
 
+
+/* Create Rose */
 
 function createRose(){
 
@@ -247,10 +289,12 @@ function createRose(){
 }
 
 
-/* Final */
+/* Final Button */
 
 function final(){
-    alert("Happy Propose Day, my love 😙❤️\nForever yours.");
+
+    alert("Happy Propose Day 😙❤️\nForever yours.");
+
 }
 
 </script>
