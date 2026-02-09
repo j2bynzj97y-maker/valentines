@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bully Mode 🤭❤️</title>
+<title>Emotional Damage 😞</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 
@@ -15,15 +15,14 @@ body{
     height:100vh;
     overflow:hidden;
     font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#ffd6e8,#fff0f5);
+    background:linear-gradient(135deg,#ffe6ee,#fff5f8);
 }
 
 /* screens */
 
 .screen{
     position:absolute;
-    width:100%;
-    height:100%;
+    inset:0;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -49,15 +48,15 @@ h1{
 p{
     font-size:1.1em;
     color:#444;
-    max-width:500px;
+    max-width:520px;
     line-height:1.6;
 }
 
 /* buttons */
 
 button{
-    margin-top:20px;
-    padding:14px 36px;
+    margin-top:25px;
+    padding:14px 38px;
     border:none;
     border-radius:40px;
     font-size:16px;
@@ -72,15 +71,15 @@ button:hover{
     transform:scale(1.08);
 }
 
-/* bully buttons */
+/* dramatic effects */
 
-.choice{
-    background:white;
-    color:#ff4d88;
-    margin:10px;
+.fade{
+    animation:fade 1.2s forwards;
 }
 
-/* shake */
+@keyframes fade{
+    to{opacity:.4;}
+}
 
 .shake{
     animation:shake .3s linear 3;
@@ -94,29 +93,19 @@ button:hover{
     100%{transform:translateX(0)}
 }
 
-/* roses */
+/* tears */
 
-.rose{
+.tear{
     position:absolute;
-    bottom:-20px;
-    left:50%;
-    font-size:28px;
-    animation:burst linear forwards;
+    top:0;
+    font-size:22px;
+    animation:drop 2.5s linear forwards;
     pointer-events:none;
 }
 
-@keyframes burst{
-    from{
-        transform:translateX(-50%) scale(.8);
-        opacity:1;
-    }
-    to{
-        transform:
-        translate(calc(-50% + var(--x)),-110vh)
-        rotate(var(--r))
-        scale(1.3);
-        opacity:.9;
-    }
+@keyframes drop{
+    from{transform:translateY(-10px);opacity:1;}
+    to{transform:translateY(110vh);opacity:0;}
 }
 
 </style>
@@ -127,35 +116,64 @@ button:hover{
 <!-- Screen 1 -->
 
 <div id="s1" class="screen">
-<h1>HIEEEEEE 😞❤️</h1>
-<p>AAPTO APNE BABY SE NAARAZ HE HOGYE😞😞</p>
-<button onclick="go(2)">Yes 😒</button>
+<h1>Oh… 😞</h1>
+<p>
+“So you don’t care.”<br><br>
+Interesting.<br>
+Very interesting.
+</p>
+<button onclick="go(2)">Continue reading my downfall</button>
 </div>
 
 <!-- Screen 2 -->
 
 <div id="s2" class="screen hidden">
-<h1>BULLY MODE: ON 😤</h1>
-<p>WELL SINCE YOU MAD AT ME<br>YOU GET FULL CONTROL.</p>
-
-<button class="choice" onclick="insult()">Insult Him 😤</button>
-<button class="choice" onclick="suffer()">Make Him Suffer 😏</button>
-<button class="choice" onclick="forgive()">Forgive Him (maybe) 🤭</button>
-
-<p id="response"></p>
+<h1>Overthinking Mode: ON</h1>
+<p>
+Did I try too hard?<br>
+Did I care too much?<br>
+Did I open VS Code for nothing? 😞💔
+</p>
+<button onclick="go(3)">Think harder</button>
 </div>
 
 <!-- Screen 3 -->
 
 <div id="s3" class="screen hidden">
-<h1>Okay okay 😞❤️</h1>
+<h1>EMOTIONAL DAMAGE</h1>
 <p>
-IT WONT HAPPN AGAIN.<br>
-WILL INFORM DHNG SE.<br>
-I'LL GET YOU CHOCOLATES ASWELL.<br><br>
-AND ALSOO<br>
-I LOVE YOU SO SO MUCH 🤭❤️
+Hours of coding.<br>
+Sleepless nights.<br>
+One sentence: “I don’t care.”<br><br>
+Wow.
 </p>
+<button onclick="breakDown()">Accept fate</button>
+</div>
+
+<!-- Screen 4 -->
+
+<div id="s4" class="screen hidden">
+<h1>It’s okay.</h1>
+<p>
+I’ll survive.<br>
+I’ll move on.<br>
+I’ll pretend I’m strong.<br><br>
+(This is a lie 😞)
+</p>
+<button onclick="go(5)">Final words</button>
+</div>
+
+<!-- Screen 5 -->
+
+<div id="s5" class="screen hidden">
+<h1>JUST KIDDING 🤭</h1>
+<p>
+I know you care.<br>
+You’re just mean sometimes.<br><br>
+And I’m dramatic always.<br><br>
+Fair trade? 😏❤️
+</p>
+<button onclick="end()">Okay forgive me now</button>
 </div>
 
 <script>
@@ -168,65 +186,45 @@ function go(n){
     current=n;
 }
 
-/* insults */
+/* breakdown */
 
-const insults=[
-"HATE HIM.",
-"FCK YOU.",
-"THINKS HE'S CUTE (he is 😞❤️).",
-"ANNOYING.",
-"NEEDS PITAAI😞."
-];
+function breakDown(){
 
-function insult(){
-    document.getElementById("response").innerText=
-    insults[Math.floor(Math.random()*insults.length)];
-}
-
-/* suffer */
-
-function suffer(){
     document.body.classList.add("shake");
-    document.getElementById("response").innerText=
-    "ALREADY SUFFERING MY LOVE, ALREADY SUFFERING 😞❤️";
-    setTimeout(()=>document.body.classList.remove("shake"),800);
+
+    for(let i=0;i<15;i++){
+        createTear();
+    }
+
+    setTimeout(()=>{
+        document.body.classList.remove("shake");
+        go(4);
+    },900);
 }
 
-/* forgive */
+/* tears */
 
-function forgive(){
-    go(3);
-    startRoses();
+function createTear(){
+    let t=document.createElement("div");
+    t.className="tear";
+    t.innerHTML="😞";
+    t.style.left=Math.random()*100+"vw";
+    t.style.animationDuration=(2+Math.random())+"s";
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),3000);
 }
 
-/* roses */
+/* end */
 
-function startRoses(){
-    let burst=setInterval(()=>{
-        for(let i=0;i<18;i++){
-            createRose();
-        }
-    },130);
-
-    setTimeout(()=>clearInterval(burst),1600);
-}
-
-function createRose(){
-    let r=document.createElement("div");
-    r.className="rose";
-    r.innerHTML="🌹";
-    r.style.setProperty("--x",(Math.random()-0.5)*500+"px");
-    r.style.setProperty("--r",Math.random()*720+"deg");
-    r.style.fontSize=(22+Math.random()*18)+"px";
-    r.style.animationDuration=(2+Math.random())+"s";
-    document.body.appendChild(r);
-    setTimeout(()=>r.remove(),3000);
+function end(){
+    document.body.classList.add("fade");
 }
 
 </script>
 
 </body>
 </html>
+
 
 
 
